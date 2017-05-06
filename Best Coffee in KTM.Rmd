@@ -1,0 +1,48 @@
+---
+title: "Best Coffee in Kathmandu"
+author: "J Hudlow"
+date: "May 6, 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## May 6, 2017
+
+```{r, fig.align='center', fig.cap='Best Coffee Shops in Kathmandu'}
+library(leaflet)
+my_map <- my_map %>%
+    addMarkers(lat = 27.7129, lng = 85.3166, 
+               popup="Ktm")
+my_map
+
+coffeeIcon <- makeIcon(
+    iconUrl = "https://cdn2.iconfinder.com/data/icons/food-solid-icons-volume-1/128/011-512.png",
+    iconWidth = 31*215/230, iconHeight = 31,
+    iconAnchorX = 31*215/230/2, iconAnchorY = 16
+)
+
+coffeeLatLong <- data.frame(
+    lat = c(27.714, 27.6915, 27.679, 27.677, 27.7183, 27.6737),
+    lng = c(85.314, 85.3168, 85.310, 85.311, 85.3208, 85.3144)
+)
+
+
+coffeeSites <- c(
+    "<a href='http://www.himalayanjava.com/'>Himalayan Java - Garden of Dreams</a>",
+    "<a href='http://www.himalayanjava.com/'>Himalayan Java - Tripeshwor</a>",
+    "<a href='https://www.facebook.com/cafesoma/'>Cafe Soma</a>",
+    "<a href='https://www.facebook.com/karmacoffeenp/'>Karma Coffee</a>",
+    "<a href='https://www.shoplavazza.com/?utm_source=google&utm_medium=cpc&utm_campaign=us-brand-short&gclid=CPiOoeHk2tMCFdaIaAod8CIP9w'>Lavazza Lazimpat</a>",
+    "<a href='https://www.shoplavazza.com/?utm_source=google&utm_medium=cpc&utm_campaign=us-brand-short&gclid=CPiOoeHk2tMCFdaIaAod8CIP9w'>Lavazza Jawalakhel</a>"
+)
+
+coffeeLatLong %>%
+    leaflet() %>%
+    addTiles() %>%
+    addMarkers(icon = coffeeIcon, popup = coffeeSites)
+
+
+```
